@@ -14,9 +14,9 @@ public record HuffmanNode(int charAscii, int freq, HuffmanTree left, HuffmanTree
 
      public boolean comesBefore(HuffmanTree other) {
          if(this.freq == other.freq()){
-             return this.charAscii >= other.charAscii();
+             return this.charAscii < other.charAscii();
          }
-         return this.freq > other.freq();
+         return this.freq < other.freq();
     }
 
     public HuffmanTree combine(HuffmanTree other) {
