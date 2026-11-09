@@ -1,4 +1,8 @@
 public interface HuffmanTree extends Comparable<HuffmanTree> {
+
+    //need to add this to make comesBefore possible
+    int freq();
+    int charAscii();
     /**
      * Returns true if the tree rooted at node a comes before the tree
      * rooted at node b, false otherwise.
@@ -7,6 +11,7 @@ public interface HuffmanTree extends Comparable<HuffmanTree> {
      * Ties are broken using the ASCII value of the character: the node
      * with the smaller ASCII value comes first.
      */
+
     public boolean comesBefore(HuffmanTree other);
 
     /**
@@ -27,5 +32,4 @@ public interface HuffmanTree extends Comparable<HuffmanTree> {
      */
     @Override
     public int compareTo(HuffmanTree other);
-
     }

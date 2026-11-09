@@ -1,9 +1,11 @@
-public record HuffmanLeaf (int freq, char charASCII) implements HuffmanTree{
+public record HuffmanLeaf (int freq, int charAscii) implements HuffmanTree{
 
     @Override
     public boolean comesBefore(HuffmanTree other) {
-        // unimplemented...
-        return false;
+        if(this.freq == other.freq()){
+            return this.charAscii >= other.charAscii();
+        }
+        return this.freq > other.freq();
     }
 
     @Override
