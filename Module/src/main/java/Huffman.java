@@ -52,9 +52,23 @@ public class Huffman {
      *    one unique character), return a single leaf HuffmanNode for that
      *    character (no combine() call needed).
      */
-    public static HuffmanNode createHuffTree(int[] freq) {
-        // TODO: implement
-        return null;
+    public static HuffmanTree createHuffTree(int[] freq) {
+        HuffmanList list = new HuffmanList();
+        for(int i = 0; i < freq.length; i++){
+            if(freq[i] != 0){
+                list.enqueue(new HuffmanLeaf(freq[i], i));
+            }
+        }
+        if(list.isEmpty())return null;
+        else if(list.count() == 1)return list.dequeue();
+        else{
+            while(list.count() != 1){
+                HuffmanTree first = list.dequeue();
+                HuffmanTree second = list.dequeue();
+                list.enqueue(first.combine(second));
+            }
+            return list.dequeue();
+        }
     }
 
     /**
@@ -72,7 +86,10 @@ public class Huffman {
     public static String[] createCode(HuffmanTree root) {
         String[] codes = new String[NUM_CHARS];
         Arrays.fill(codes, "");
-        // TODO: implement
+
+        String workingCode = "";
+
+
         return codes;
     }
 
