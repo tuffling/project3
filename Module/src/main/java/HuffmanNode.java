@@ -20,8 +20,15 @@ public record HuffmanNode(int charAscii, int freq, HuffmanTree left, HuffmanTree
     }
 
     public HuffmanTree combine(HuffmanTree other) {
-        // TODO: implement
-        return null;
+        int sum = this.freq + other.freq();
+        int charVal = Math.min(this.charAscii, other.charAscii());
+
+        if(this.comesBefore(other)) {
+            return new HuffmanNode(charVal, sum, this, other);
+        }
+        else{
+            return new HuffmanNode(charVal, sum, other, this);
+        }
     }
 
     /**
@@ -31,8 +38,12 @@ public record HuffmanNode(int charAscii, int freq, HuffmanTree left, HuffmanTree
      */
     @Override
     public int compareTo(HuffmanTree other) {
-        if (this.comesBefore(other)) return -1;
-        if (other.comesBefore(this)) return 1;
+        if(this.comesBefore(other)){
+            return -1;
+        }
+        else if(other.comesBefore(this)){
+            return 1;
+        }
         return 0;
     }
 }

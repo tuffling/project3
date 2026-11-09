@@ -23,7 +23,12 @@ public record HuffmanLeaf (int freq, int charAscii) implements HuffmanTree{
 
     @Override
     public int compareTo(HuffmanTree other) {
-        // unimplemented ...
+        if(this.comesBefore(other)){
+            return -1;
+        }
+        else if(other.comesBefore(this)){
+            return 1;
+        }
         return 0;
     }
 }
