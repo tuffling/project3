@@ -180,7 +180,18 @@ public class Huffman {
      */
     public static int[] parseHeader(String headerString) {
         int[] freq = new int[NUM_CHARS];
-        // TODO: implement
+
+        if (headerString.isBlank()) {
+            return freq;
+        }
+        String[] values = headerString.trim().split("\\s+");
+
+        for (int i = 0; i < values.length; i += 2) {
+            int charAscii = Integer.parseInt(values[i]);
+            int count = Integer.parseInt(values[i + 1]);
+
+            freq[charAscii] = count;
+        }
         return freq;
     }
 
