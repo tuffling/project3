@@ -120,8 +120,17 @@ public class Huffman {
      * Example: for the text "aaabbbbcc" this returns "97 3 98 4 99 2".
      */
     public static String createHeader(int[] freq) {
-        // TODO: implement
-        return "";
+        StringBuilder header = new StringBuilder();
+
+        for (int i = 0; i < freq.length; i++) {
+            if (freq[i] != 0) {
+                if (!header.isEmpty()) {
+                    header.append(" ");
+                }
+                header.append(i).append(" ").append(freq[i]);
+            }
+        }
+        return header.toString();
     }
 
     /**
