@@ -84,15 +84,24 @@ public class Huffman {
      * handle that case entirely through the header.
      */
     public static String[] createCode(HuffmanTree root) {
-        String[] codes = new String[NUM_CHARS];
+        String[] codes = new String[256];
         Arrays.fill(codes, "");
 
-        String workingCode = "";
-
-
+        buildCodes(root, "", codes);
         return codes;
     }
 
+    private static void buildCodes(HuffmanTree tree, String code, String[] codes) {
+        switch (tree) {
+            case null -> {}
+            case HuffmanLeaf(int freq, int charAscii) -> codes[charAscii] = code;
+            case HuffmanNode(int charAscii, int freq, HuffmanTree left, HuffmanTree right) -> {
+                buildCodes(left, code + "0", codes);
+                buildCodes(right, code + "1", codes);
+            }
+            default -> {}
+        }
+    }
     /**
      * Given a frequency array (as produced by cntFreq()), returns a
      * header string listing the ASCII values and their associated
