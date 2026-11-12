@@ -211,6 +211,53 @@ public class Huffman {
      * so write it out that many times directly.
      */
     public static void huffmanDecode(String encodedFile, String decodeFile) throws IOException {
-        // TODO: implement
+        BufferedReader input = new BufferedReader(new FileReader(encodedFile));
+        FileOutputStream output = new FileOutputStream(decodeFile);
+        String header = input.readLine();
+
+        if (header == null) {
+            input.close();
+            output.close();
+            return;
+        }
+
+        HuffmanTree root = createHuffTree(parseHeader(header));
+
+        switch (root) {
+            case null -> {}
+            case HuffmanLeaf(int freq, int charAscii) -> {
+                for (int i = 0; i < freq; i++) {
+                    output.write(charAscii);
+                }
+            }
+            case HuffmanNode(int ascii, int freq, HuffmanTree left, HuffmanTree right) -> {
+                HuffmanTree current = root;
+                int bit = input.read();
+                while (bit != -1){
+                    switch (current){
+                        case HuffmanNode(int a, int f, HuffmanTree l, HuffmanTree r) -> {
+                            current = switch (bit){
+                                case '0' -> l;
+                                case '1' -> r;
+                                default -> throw new IOException("Invalid bit");
+                            };
+                        }
+                        default -> throw new IOException("Invalid tree");
+                    }
+                    switch (current){
+                        case HuffmanLeaf(int f, int character) -> {
+                            output.write(character);
+                            current = root;
+                        }
+                        default -> {}
+                    }
+                    bit = input.read();
+                }
+            }
+            default -> throw new IOException("Unknown tree type");
+        }
+        input.close();
+        output.close();
     }
+
 }
