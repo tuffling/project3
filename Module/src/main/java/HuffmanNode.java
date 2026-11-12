@@ -12,13 +12,15 @@
 public record HuffmanNode(int charAscii, int freq, HuffmanTree left, HuffmanTree right)
         implements HuffmanTree{
 
-     public boolean comesBefore(HuffmanTree other) {
+    // Returns whether this tree precedes other by frequency, then ASCII value
+    public boolean comesBefore(HuffmanTree other) {
          if(this.freq == other.freq()){
              return this.charAscii < other.charAscii();
          }
          return this.freq < other.freq();
     }
 
+    // Returns a new parent combining this tree and other, placing the smaller tree left
     public HuffmanTree combine(HuffmanTree other) {
         int sum = this.freq + other.freq();
         int charVal = Math.min(this.charAscii, other.charAscii());
@@ -36,6 +38,8 @@ public record HuffmanNode(int charAscii, int freq, HuffmanTree left, HuffmanTree
      * objects can be stored directly in a sorted structure (e.g. a
      * PriorityQueue or a sorted List) while building the tree.
      */
+
+    // Returns a negative, zero, or positive value when this tree precedes, ties, or follows other
     @Override
     public int compareTo(HuffmanTree other) {
         if(this.comesBefore(other)){

@@ -32,6 +32,8 @@ public class Huffman {
      * Returns an int array of size NUM_CHARS, indexed by ASCII value, with
      * the count of each character (0 for characters that do not occur).
      */
+
+    // Reads filename and returns a 256 entry array of char frequencies
     public static int[] cntFreq(String filename) throws IOException {
         int[] freq = new int[NUM_CHARS];
         FileInputStream input = new FileInputStream(filename);
@@ -61,6 +63,9 @@ public class Huffman {
      *    one unique character), return a single leaf HuffmanNode for that
      *    character (no combine() call needed).
      */
+
+
+    // Builds a Huffman tree from freq and returns its root, or null if empty
     public static HuffmanTree createHuffTree(int[] freq) {
         HuffmanList list = new HuffmanList();
         for(int i = 0; i < freq.length; i++){
@@ -92,6 +97,9 @@ public class Huffman {
      * left/right branch to build a code out of; huffmanEncode/huffmanDecode
      * handle that case entirely through the header.
      */
+
+
+    // Returns a 256 entry code array for root, with unused characters set to ""
     public static String[] createCode(HuffmanTree root) {
         String[] codes = new String[256];
         Arrays.fill(codes, "");
@@ -100,6 +108,8 @@ public class Huffman {
         return codes;
     }
 
+
+    // Traverses tree using code as the path and stores each leaf's code in codes
     private static void buildCodes(HuffmanTree tree, String code, String[] codes) {
         switch (tree) {
             case null -> {}
@@ -119,6 +129,8 @@ public class Huffman {
      *
      * Example: for the text "aaabbbbcc" this returns "97 3 98 4 99 2".
      */
+
+    // Returns the nonzero ASCII frequency pairs in freq as a space-separated header
     public static String createHeader(int[] freq) {
         StringBuilder header = new StringBuilder();
 
@@ -146,6 +158,8 @@ public class Huffman {
      *  - Input file with only one unique character: should contain only the
      *    header line (e.g. "97 5") and nothing else - no second line of code bits.
      */
+
+    // Encodes inFile into outFile, replacing any existing output
     public static void huffmanEncode(String inFile, String outFile) throws IOException {
         int[] freq = cntFreq(inFile);
         HuffmanTree root = createHuffTree(freq);
@@ -178,6 +192,8 @@ public class Huffman {
      *
      * Example: for the header "97 3 98 4 99 2", freq[97, 98, 99] == {3, 4, 2}.
      */
+
+    // Converts headerString's ASCII frequency pairs into a 256 entry frequency array
     public static int[] parseHeader(String headerString) {
         int[] freq = new int[NUM_CHARS];
 
@@ -210,6 +226,9 @@ public class Huffman {
      * The header's count alone tells you how many times that character occurred,
      * so write it out that many times directly.
      */
+
+
+    // Decodes encodedFile into decodeFile, replacing any existing output
     public static void huffmanDecode(String encodedFile, String decodeFile) throws IOException {
         BufferedReader input = new BufferedReader(new FileReader(encodedFile));
         FileOutputStream output = new FileOutputStream(decodeFile);

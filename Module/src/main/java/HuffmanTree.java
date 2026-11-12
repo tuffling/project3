@@ -1,7 +1,10 @@
 public interface HuffmanTree extends Comparable<HuffmanTree> {
 
     //need to add this to make comesBefore possible
+
+    // Returns this tree's frequency count
     int freq();
+    // Returns this tree's ASCII value used to break frequency ties
     int charAscii();
     /**
      * Returns true if the tree rooted at node a comes before the tree

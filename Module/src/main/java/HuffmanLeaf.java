@@ -1,5 +1,7 @@
 public record HuffmanLeaf (int freq, int charAscii) implements HuffmanTree{
 
+
+    // Returns whether this tree precedes other by frequency, then ASCII value
     @Override
     public boolean comesBefore(HuffmanTree other) {
         if(this.freq == other.freq()){
@@ -8,6 +10,8 @@ public record HuffmanLeaf (int freq, int charAscii) implements HuffmanTree{
         return this.freq < other.freq();
     }
 
+
+    // Returns a new parent combining this tree and other, placing the smaller tree left
     @Override
     public HuffmanTree combine(HuffmanTree other) {
         int sum = this.freq + other.freq();
@@ -21,6 +25,7 @@ public record HuffmanLeaf (int freq, int charAscii) implements HuffmanTree{
         }
     }
 
+    // Returns a negative, zero, or positive value when this tree precedes, ties, or follows other
     @Override
     public int compareTo(HuffmanTree other) {
         if(this.comesBefore(other)){
