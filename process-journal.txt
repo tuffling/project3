@@ -1,0 +1,14 @@
+CSC 2001 Project 3: Process Journal
+
+November 9, 2026
+Worked by: Ben
+
+Implemented tree ordering, comparison, and combining
+Added the sorted linked list and createHuffTree
+
+November 11, 2026
+Worked by: Ben and Arnav
+
+Implemented code generation, frequency counting, headers, encoding, and decoding
+Added tests with AI assistance and confirmed all tests passed
+Added purpose statements and preserved text file line endings
